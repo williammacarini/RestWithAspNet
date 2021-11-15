@@ -1,0 +1,24 @@
+sudo: required
+dist: bionic
+language: csharp
+mono: none
+dotnet:5.0
+servies: docker
+before_install:
+  - cd 00_RestWithAspNet_ScaffoldViaVisualStudio/
+  -echo "We are in the right folder!"
+script:
+  - docker-compose bluid
+before_deploy:
+  - echo "$DOCKER_PASSWORD" | docker login --username "$DOCKER_USERNAME" --password-stdin
+deploy:
+  provider:script
+  script:
+    docker tag rest-with-aspnet-db:latest $DOCKER_USERNAME/rest-with-aspnet-db:$TRAVIS_JOB_ID;
+    docker tag rest-with-aspnet:latest $DOCKER_USERNAME/rest-with-aspnet:$TRAVIS_JOB_ID;
+    docker push $DOCKER_USERNAME/rest-with-aspnet:$TRAVIS_JOB_ID;
+    docker push $DOCKER_USERNAME/rest-with-aspnet-db:$TRAVIS_JOB_ID;
+  on:
+    branch: master
+notifications:
+  email: false
