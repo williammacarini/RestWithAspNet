@@ -5,7 +5,7 @@ mono: none
 dotnet: 5.0
 servies: docker
 before_install:
-  - cd 00_RestWithAspNet_ScaffoldViaVisualStudio/
+  - cd 00_RestWithAspNet_ScaffoldViaVisualStudio/RestWithAspNet
   -echo "We are in the right folder!"
 script:
   - docker-compose bluid
