@@ -6,13 +6,13 @@ dotnet: 5.0
 servies: docker
 before_install:
   - cd 00_RestWithAspNet_ScaffoldViaVisualStudio/RestWithAspNet
-  -echo "We are in the right folder!"
+  - echo "We are in the right folder!"
 script:
   - docker-compose bluid
 before_deploy:
   - echo "$DOCKER_PASSWORD" | docker login --username "$DOCKER_USERNAME" --password-stdin
 deploy:
-  provider:script
+  provider: script
   script:
     docker tag rest-with-aspnet-db:latest $DOCKER_USERNAME/rest-with-aspnet-db:$TRAVIS_JOB_ID;
     docker tag rest-with-aspnet:latest $DOCKER_USERNAME/rest-with-aspnet:$TRAVIS_JOB_ID;
