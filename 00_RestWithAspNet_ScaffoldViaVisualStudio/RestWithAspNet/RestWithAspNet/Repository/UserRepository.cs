@@ -40,7 +40,7 @@ namespace RestWithAspNet.Repository
             return true;
         }
 
-        private string ComputeHash(string input, SHA256CryptoServiceProvider algorithm)
+        private static string ComputeHash(string input, SHA256CryptoServiceProvider algorithm)
         {
             Byte[] inputBytes = Encoding.UTF8.GetBytes(input);
             Byte[] hashedBytes = algorithm.ComputeHash(inputBytes);
@@ -56,18 +56,10 @@ namespace RestWithAspNet.Repository
 
             if (result != null)
             {
-                try
-                {
-                    _context.Entry(result).CurrentValues.SetValues(user);
-                    _context.SaveChanges();
+                _context.Entry(result).CurrentValues.SetValues(user);
+                _context.SaveChanges();
 
-                    return result;
-                }
-                catch (Exception)
-                {
-
-                    throw;
-                }
+                return result;
             }
             return result;
         }

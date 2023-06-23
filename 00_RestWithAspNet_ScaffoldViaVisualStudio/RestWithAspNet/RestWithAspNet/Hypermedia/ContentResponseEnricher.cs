@@ -13,7 +13,7 @@ namespace RestWithAspNet.HyperMedia
 {
     public abstract class ContentResponseEnricher<T> : IResponseEnricher where T : ISupportsHyperMedia
     {
-        public ContentResponseEnricher()
+        protected ContentResponseEnricher()
         {
 
         }
@@ -25,19 +25,19 @@ namespace RestWithAspNet.HyperMedia
 
         protected abstract Task EnrichModel(T content, IUrlHelper urlHelper);
 
-        bool IResponseEnricher.CanEnrich(ResultExecutingContext response)
+        bool IResponseEnricher.CanEnrich(ResultExecutingContext context)
         {
-            if (response.Result is OkObjectResult okObjectResult)
+            if (context.Result is OkObjectResult okObjectResult)
             {
                 return CanEnrich(okObjectResult.Value.GetType());
             }
             return false;
         }
 
-        public async Task Enrich(ResultExecutingContext response)
+        public async Task Enrich(ResultExecutingContext context)
         {
-            var urlHelper = new UrlHelperFactory().GetUrlHelper(response);
-            if (response.Result is OkObjectResult okObjectResult)
+            var urlHelper = new UrlHelperFactory().GetUrlHelper(context);
+            if (context.Result is OkObjectResult okObjectResult)
             {
                 if (okObjectResult.Value is T model)
                 {

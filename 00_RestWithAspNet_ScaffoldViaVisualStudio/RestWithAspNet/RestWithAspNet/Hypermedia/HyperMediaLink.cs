@@ -12,10 +12,10 @@ namespace RestWithAspNet.HyperMedia
         {
             get
             {
-                object _lock = new object();
+                object _lock = new();
                 lock (_lock)
                 {
-                    StringBuilder sb = new StringBuilder(href);
+                    StringBuilder sb = new(href);
                     return sb.Replace("%2F", "/").ToString();
                 }
             }

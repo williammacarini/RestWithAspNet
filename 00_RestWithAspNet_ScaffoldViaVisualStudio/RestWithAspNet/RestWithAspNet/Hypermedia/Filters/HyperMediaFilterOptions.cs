@@ -5,6 +5,6 @@ namespace RestWithAspNet.HyperMedia.Filters
 {
     public class HyperMediaFilterOptions
     {
-        public List<IResponseEnricher> ContentResponseEnricherList { get; set; } = new List<IResponseEnricher>();
+        public List<IResponseEnricher> ContentResponseEnricherList { get; set; } = new();
     }
 }

@@ -1,9 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using RestWithAspNet.Data.VO;
-using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace RestWithAspNet.Business.Implementations
@@ -40,7 +38,7 @@ namespace RestWithAspNet.Business.Implementations
             {
                 var docName = Path.GetFileName(file.FileName);
 
-                if (file != null && file.Length > 0)
+                if (file is not null && file.Length > 0)
                 {
                     var destination = Path.Combine(_basePath, "", docName);
 
@@ -57,7 +55,7 @@ namespace RestWithAspNet.Business.Implementations
 
         public async Task<List<FileDetailVO>> SaveFilesToDisk(IList<IFormFile> files)
         {
-            List<FileDetailVO> list = new List<FileDetailVO>();
+            List<FileDetailVO> list = new();
 
             foreach (var file in files)
             {

@@ -32,12 +32,11 @@ namespace RestWithAspNet.Business.Implementations
             var offset = page > 0 ? (page - 1) * size : 0;
 
             string query = @"select * from person p where 1 = 1 ";
-            if (!string.IsNullOrWhiteSpace(name)) query = query +
-                    $"and p.first_name like '%{name}%'";
+            if (!string.IsNullOrWhiteSpace(name)) query += $"and p.first_name like '%{name}%'";
             query += $" order by p.first_name {sort} limit {size} offset {offset}";
 
             string countQuery = @"select * from person p where  1 = 1";
-            if (!string.IsNullOrWhiteSpace(name)) countQuery = countQuery + $"and p.first_name like '%{name}%'";
+            if (!string.IsNullOrWhiteSpace(name)) countQuery += $"and p.first_name like '%{name}%'";
 
             var person = _repository.FindWithPagedSearch(query);
 

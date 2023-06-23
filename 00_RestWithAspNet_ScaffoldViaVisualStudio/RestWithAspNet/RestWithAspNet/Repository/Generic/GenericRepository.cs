@@ -1,7 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using RestWithAspNet.Model.Base;
 using RestWithAspNet.Model.Context;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -21,17 +20,9 @@ namespace RestWithAspNet.Repository.Generic
 
         public T Create(T item)
         {
-            try
-            {
-                _context.Add(item);
-                _context.SaveChanges();
-                return item;
-            }
-            catch (Exception)
-            {
-
-                throw;
-            }
+            _context.Add(item);
+            _context.SaveChanges();
+            return item;
         }
 
         public void Delete(long id)
@@ -40,15 +31,8 @@ namespace RestWithAspNet.Repository.Generic
 
             if (result != null)
             {
-                try
-                {
-                    dataSet.Remove(result);
-                    _context.SaveChanges();
-                }
-                catch (Exception)
-                {
-                    throw;
-                }
+                dataSet.Remove(result);
+                _context.SaveChanges();
             }
         }
 
@@ -73,18 +57,10 @@ namespace RestWithAspNet.Repository.Generic
 
             if (result != null)
             {
-                try
-                {
-                    _context.Entry(result).CurrentValues.SetValues(item);
-                    _context.SaveChanges();
+                _context.Entry(result).CurrentValues.SetValues(item);
+                _context.SaveChanges();
 
-                    return item;
-                }
-                catch (Exception)
-                {
-
-                    throw;
-                }
+                return item;
             }
             else
             {
@@ -105,12 +81,9 @@ namespace RestWithAspNet.Repository.Generic
             {
                 connection.Open();
 
-                using (var command = connection.CreateCommand())
-                {
-                    command.CommandText = query;
-
-                    result = command.ExecuteScalar().ToString();
-                }
+                using var command = connection.CreateCommand();
+                command.CommandText = query;
+                result = command.ExecuteScalar().ToString();
             }
             return int.Parse(result);
         }

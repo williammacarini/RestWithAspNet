@@ -1,10 +1,9 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using RestWithAspNet.Business;
 using RestWithAspNet.Data.VO;
 using RestWithAspNet.HyperMedia.Filters;
-using Microsoft.Extensions.Logging;
 using System.Collections.Generic;
-using Microsoft.AspNetCore.Authorization;
 
 namespace RestWithAspNet.Controllers
 {
@@ -14,14 +13,10 @@ namespace RestWithAspNet.Controllers
     [Authorize("Bearer")]
     public class PersonController : ControllerBase
     {
-
-        private readonly ILogger<PersonController> _logger;
-
         private readonly IPersonBusiness _personBusiness;
 
-        public PersonController(ILogger<PersonController> logger, IPersonBusiness personBusiness)
+        public PersonController(IPersonBusiness personBusiness)
         {
-            _logger = logger;
             _personBusiness = personBusiness;
         }
 

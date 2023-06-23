@@ -12,8 +12,8 @@ namespace RestWithAspNet.Business.Implementations
     public class LoginBusinessImplementation : ILoginBusiness
     {
         private const string DATE_FORMAT = "yyyy-MM-dd HH:mm:ss";
-        private TokenConfiguration _configuration;
-        private IUserRepository _repository;
+        private readonly TokenConfiguration _configuration;
+        private readonly IUserRepository _repository;
         private readonly ITokenService _tokenService;
 
         public LoginBusinessImplementation(TokenConfiguration configuration, IUserRepository repository, ITokenService tokenService)
@@ -23,9 +23,9 @@ namespace RestWithAspNet.Business.Implementations
             _tokenService = tokenService;
         }
 
-        public TokenVO ValidadeCredentials(UserVO userCredentials)
+        public TokenVO ValidadeCredentials(UserVO userVo)
         {
-            var user = _repository.ValidateCredentials(userCredentials);
+            var user = _repository.ValidateCredentials(userVo);
             if (user == null) return null;
             var claims = new List<Claim>
             {
@@ -80,8 +80,7 @@ namespace RestWithAspNet.Business.Implementations
                 createdDate.ToString(DATE_FORMAT),
                 expirationDate.ToString(DATE_FORMAT),
                 accessToken,
-                refreshToken
-                );
+                refreshToken);
         }
 
         public bool RevokeToken(string userName)

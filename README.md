@@ -1,3 +1,3 @@
 # RestWithAspNet
 
-[![Build Status](https://app.travis-ci.com/William59m/RestWithAspNet.svg?branch=main)](https://app.travis-ci.com/William59m/RestWithAspNet)
+Projeto criado consiste em uma API Rest com CRUD simples, autenticação, Dockerfile para construir as imagens e docker-compose para rodar a imagem MySql.

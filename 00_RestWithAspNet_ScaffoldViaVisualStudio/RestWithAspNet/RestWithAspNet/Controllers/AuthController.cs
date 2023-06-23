@@ -10,7 +10,7 @@ namespace RestWithAspNet.Controllers
     [ApiController]
     public class AuthController : ControllerBase
     {
-        private ILoginBusiness _loginBusiness;
+        private readonly ILoginBusiness _loginBusiness;
 
         public AuthController(ILoginBusiness loginBusiness)
         {

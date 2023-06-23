@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
 using RestWithAspNet.Business;
 using RestWithAspNet.Data.VO;
 using RestWithAspNet.HyperMedia.Filters;
@@ -16,11 +15,8 @@ namespace RestWithAspNet.Controllers
     {
         private readonly IBookBusiness _bookBusiness;
 
-        private readonly ILogger<BookController> _logger;
-
-        public BookController(ILogger<BookController> logger, IBookBusiness bookBusiness)
+        public BookController(IBookBusiness bookBusiness)
         {
-            _logger = logger;
             _bookBusiness = bookBusiness;
         }
 

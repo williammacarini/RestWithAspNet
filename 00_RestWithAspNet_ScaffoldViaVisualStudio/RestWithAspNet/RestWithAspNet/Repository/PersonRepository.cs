@@ -1,7 +1,6 @@
 ﻿using RestWithAspNet.Model;
 using RestWithAspNet.Model.Context;
 using RestWithAspNet.Repository.Generic;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -21,16 +20,8 @@ namespace RestWithAspNet.Repository
             if (user != null)
             {
                 user.Enabled = false;
-                try
-                {
-                    _context.Entry(user).CurrentValues.SetValues(user);
-                    _context.SaveChanges();
-                }
-                catch (Exception)
-                {
-
-                    throw;
-                }
+                _context.Entry(user).CurrentValues.SetValues(user);
+                _context.SaveChanges();
             }
             return user;
         }
